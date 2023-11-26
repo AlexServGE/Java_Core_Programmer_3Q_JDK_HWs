@@ -21,11 +21,10 @@ public class Main {
         Map<Integer, String> results2 = new HashMap<>();
         Random rnd = new Random();
         int iterations = 1000;
-        int userSelection = 0;
         for (int i = 0; i < iterations; i++) {
             List<String> doors = new ArrayList<>(Arrays.asList("Пусто", "Пусто", "Пусто"));
             doors.set(rnd.nextInt(3), "Подарок");
-
+            int userSelection = rnd.nextInt(3);
             //Выриант выбор без изменения выбора
             if (doors.get(userSelection).equals("Подарок")) {
                 results1.put(i, "Подарок");
