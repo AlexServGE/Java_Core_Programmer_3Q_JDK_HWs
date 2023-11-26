@@ -19,30 +19,26 @@ public class Main {
     public static void main(String[] args) {
         Map<Integer, String> results1 = new HashMap<>();
         Map<Integer, String> results2 = new HashMap<>();
-        List<String> doors = new ArrayList<>(Arrays.asList("Подарок", "Пусто", "Пусто"));
-        List<String> doors1 = new ArrayList<>(Arrays.asList("Пусто", "Подарок", "Пусто"));
-        List<String> doors2 = new ArrayList<>(Arrays.asList("Пусто", "Пусто", "Подарок"));
-        List<List<String>> doorsVariants = new ArrayList<>(Arrays.asList(doors, doors1, doors2));
+        Random rnd = new Random();
         int iterations = 1000;
         int userSelection = 0;
-        for (int i = 0; i < iterations;) {
-            for (List<String> doorsVariant : doorsVariants) {
-                List<String> doorsTemp = new ArrayList<>(doorsVariant);
-                //Выриант выбор без изменения выбора
-                if (doorsTemp.get(userSelection).equals("Подарок")) {
-                    results1.put(i, "Подарок");
-                }
-                //Выриант выбор с изменением выбора
-                doorsTemp.remove(userSelection);
-                doorsTemp.remove("Пусто");
-                if (doorsTemp.get(0).equals("Подарок")) {
-                    results2.put(i, "Подарок");
-                }
-                i++;
+        for (int i = 0; i < iterations; i++) {
+            List<String> doors = new ArrayList<>(Arrays.asList("Пусто", "Пусто", "Пусто"));
+            doors.set(rnd.nextInt(3), "Подарок");
+
+            //Выриант выбор без изменения выбора
+            if (doors.get(userSelection).equals("Подарок")) {
+                results1.put(i, "Подарок");
+            }
+            //Выриант выбор с изменением выбора
+            doors.remove(userSelection);
+            doors.remove("Пусто");
+            if (doors.get(0).equals("Подарок")) {
+                results2.put(i, "Подарок");
             }
         }
-        System.out.printf("Количество побед без изменения выбора: %f%%",(double) results1.values().size()/iterations*100);
+        System.out.printf("Количество побед без изменения выбора: %f%%", (double) results1.values().size() / iterations * 100);
         System.out.println();
-        System.out.printf("Количество побед c изменением выбора: %f%%",(double) results2.values().size()/iterations*100);
+        System.out.printf("Количество побед c изменением выбора: %f%%", (double) results2.values().size() / iterations * 100);
     }
 }
